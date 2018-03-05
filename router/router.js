@@ -18,11 +18,6 @@ router.post("/imgs", getImgs);                  //获取图组列表
 router.post("/img", getImg);                    //获取单个图组
 router.post("/img-rm", rmImg);                  //删除单个图组
 
-router.get("/", function(req, res){
-    res.send("hello zard");
-})
-
-
 
 
 

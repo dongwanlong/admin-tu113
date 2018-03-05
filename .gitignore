@@ -1,6 +1,7 @@
 node_modules
 npm-debug.log
-dist
-public
+public/imgs
+public/sources
+public/upload
 .idea
 .vscode
