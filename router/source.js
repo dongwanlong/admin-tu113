@@ -39,7 +39,8 @@ module.exports.editSource = function (req, res) {
     let files = fs.readdirSync(tmpUpload);
     let distDir = path.resolve(sourcesPath, `./${id}`);
     let src = path.resolve(tmpUpload, `./${files[0]}`);
-    let dist = path.resolve(distDir, `./${files[0]}`);
+    let ext = files[0].split('.')[1];
+    let dist = path.resolve(distDir, `./face.${ext}`);
     clearDir(distDir);
     copy(src, dist);
 
@@ -87,7 +88,9 @@ module.exports.addSource = function (req, res) {
     let distDir = path.resolve(sourcesPath, `./${id}`);
     fs.mkdirSync(distDir);
     let src = path.resolve(tmpUpload, `./${files[0]}`);
-    let dist = path.resolve(distDir, `./${files[0]}`);
+    let ext = files[0].split('.')[1];
+    let dist = path.resolve(distDir, `./face.${ext}`);
+
     copy(src, dist);
 
     clearDir(tmpUpload);

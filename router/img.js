@@ -7,7 +7,7 @@ const uuid = require('uuid/v1');
 const moment = require('moment');
 const tmpUpload = path.resolve(__dirname, "../public/upload");
 const imgsPath = path.resolve(__dirname, "../public/imgs");
-const MAXFILE = 2;
+const MAXFILE = 700;
 
 function getImgMap(){
     let files = fs.readdirSync(imgsPath);
@@ -42,7 +42,8 @@ module.exports.editImg = function (req, res) {
     let sourceId = req.body.sourceId;  
     let map = req.body.map;
     let type = req.body.type.join('-');
-    let size = req.body.imgs.length;  
+    let size = req.body.imgs.length; 
+    let faceIndex = req.body.faceIndex; 
     let lastTime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');  
 
     //图片入库
@@ -67,6 +68,7 @@ module.exports.editImg = function (req, res) {
         _sourceId='${sourceId}',
         _sourceName='${sourceName}',
         _size='${size}',
+        _faceIndex='${faceIndex}',
         _type='${type}',
         _lastTime='${lastTime}'
         where _id='${id}'`;
@@ -92,6 +94,7 @@ module.exports.addImg = function (req, res) {
     let sourceId = req.body.sourceId;       
     let type = req.body.type.join('-');
     let size = req.body.imgs.length;  
+    let faceIndex = req.body.faceIndex;
     let createTime = time;
     let lastTime = time;  
 
@@ -120,6 +123,7 @@ module.exports.addImg = function (req, res) {
             '${sourceName}',
             '${type}',
             ${size},
+            ${faceIndex},
             '${createTime}',
             '${lastTime}'
         )`;

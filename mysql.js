@@ -1,14 +1,21 @@
 "use strict";
 var mysql=require("mysql");
 var fs = require('fs');
+var os = require('os');
 var config = JSON.parse(fs.readFileSync('./config.json'));
+var mysqlConfig = {};
 
+if(os.platform().indexOf("win")==-1){
+    mysqlConfig = config.mysql;
+}else{
+    mysqlConfig = config.mysqlTest;
+}
 
 var pool = mysql.createPool({
-    host     : config.mysql.ip,
-    user     : config.mysql.user,
-    password : config.mysql.password,
-    database : config.mysql.db
+    host     : mysqlConfig.ip,
+    user     : mysqlConfig.user,
+    password : mysqlConfig.password,
+    database : mysqlConfig.db
 });
 
 module.exports.exec = function(sql){
